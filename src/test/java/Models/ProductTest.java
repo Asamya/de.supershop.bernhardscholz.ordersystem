@@ -10,10 +10,10 @@ class ProductTest {
     void testToString() {
         //Given
         Product product = new Product(1234, "Superman-Shirt",2500);
-        String actual = "Product: \n" +
-                            "productID= 1234\n" +
-                            "productName= Superman-Shirt\n" +
-                            "productPrice= 2500\n";
+        String actual = "\n" +
+                            "productID: 1234\n" +
+                            "productName: Superman-Shirt\n" +
+                            "productPrice: 2500\n";
 
         //When
         String result = product.toString();

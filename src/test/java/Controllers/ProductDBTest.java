@@ -4,48 +4,36 @@ import Models.Product;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class ProductDBTest {
 
     @Test
-    @DisplayName("Optional returns null")
-    void testOptionalFindByIdEqualsNull() {
-        //Given
-        ProductDB studentDB = new ProductDB(
-                List.of(
-                        new Product(1,"Superman",1850),
-                        new Product(2,"Superwoman",1230)
-                ));
+    @DisplayName("Does the searched id come up")
+    public void testProductById(){
+        ProductDB newProducts = new ProductDB();
 
-        //When
-        Optional<Product> actual = studentDB.getProduct(3);
+        Product expected = new Product(3, "Spiderman", 2599);
 
-        //Then
-        assertFalse(actual.isPresent());
+        assertThat(expected.getProductID(), equalTo(newProducts.getProductById(3).getProductID()));
     }
 
     @Test
-    @DisplayName("Optional returns value")
-    void testOptionalFindByIdHasValue() {
-        //Given
-        ProductDB studentDB = new ProductDB(
-                List.of(
-                        new Product(1,"Superman",1850),
-                        new Product(2,"Superwoman",1230)
-                ));
+    @DisplayName("Does the String look as expected")
+    public void testToSrtring(){
+        ProductDB newProducts = new ProductDB();
 
-        //When
-        Optional<Product> actual = studentDB.getProduct(2);
+        String expected = "Products\n"+
+                            "Superhero: Superman\nPrice: 2499\n"+
+                            "Superhero: Superwoman\nPrice: 2999\n"+
+                            "Superhero: Spiderman\nPrice: 2599\n"+
+                            "Superhero: Hulk\nPrice: 3000\n"+
+                            "Superhero: She-Hulk\nPrice: 2599\n";
 
-        //Then
-        assertTrue(actual.isPresent());
-        assertEquals(new Product(2,"Superwoman",1230), actual.get());
+        assertThat(newProducts.toString(), equalTo(expected));
     }
+
 
 }
